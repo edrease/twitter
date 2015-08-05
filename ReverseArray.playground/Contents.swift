@@ -22,5 +22,24 @@ func reverseHarder (array: [AnyObject]) -> [AnyObject] {
   return array
 }
 
+//Still working on reversing that array manually!
 
+//FizzBuzz
 
+func fizzBuzz() {
+  
+  for number in 1...100 {
+    if (number % 5 == 0) && (number % 3 == 0)  {
+      println("FizzBuzzzzz")
+    } else if number % 3 == 0 {
+      println("Fizz")
+    } else if number % 5 == 0 {
+      println("Buzz")
+    } else {
+    println(number)
+    }
+  }
+  
+}
+
+fizzBuzz()

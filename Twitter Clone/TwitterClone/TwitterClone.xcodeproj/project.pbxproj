@@ -16,6 +16,8 @@
 		9EC159811B7077B200E4F959 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC159801B7077B200E4F959 /* Tweet.swift */; };
 		9EC159831B70783200E4F959 /* TweetJSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC159821B70783200E4F959 /* TweetJSONParser.swift */; };
 		9EC159871B712A5300E4F959 /* tweet.json in Resources */ = {isa = PBXBuildFile; fileRef = 9EC159861B712A5300E4F959 /* tweet.json */; };
+		9EC159891B719B7200E4F959 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC159881B719B7200E4F959 /* LoginService.swift */; };
+		9EC1598B1B726F6100E4F959 /* TwitterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC1598A1B726F6100E4F959 /* TwitterService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +44,8 @@
 		9EC159801B7077B200E4F959 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		9EC159821B70783200E4F959 /* TweetJSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetJSONParser.swift; sourceTree = "<group>"; };
 		9EC159861B712A5300E4F959 /* tweet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = tweet.json; sourceTree = "<group>"; };
+		9EC159881B719B7200E4F959 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		9EC1598A1B726F6100E4F959 /* TwitterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 			children = (
 				9EC159801B7077B200E4F959 /* Tweet.swift */,
 				9EC159821B70783200E4F959 /* TweetJSONParser.swift */,
+				9EC159881B719B7200E4F959 /* LoginService.swift */,
+				9EC1598A1B726F6100E4F959 /* TwitterService.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -248,8 +254,10 @@
 			files = (
 				9EC159831B70783200E4F959 /* TweetJSONParser.swift in Sources */,
 				9EC159811B7077B200E4F959 /* Tweet.swift in Sources */,
+				9EC159891B719B7200E4F959 /* LoginService.swift in Sources */,
 				9EC159601B70770B00E4F959 /* ViewController.swift in Sources */,
 				9EC1595E1B70770B00E4F959 /* AppDelegate.swift in Sources */,
+				9EC1598B1B726F6100E4F959 /* TwitterService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +455,7 @@
 				9EC159791B70770B00E4F959 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9EC1597A1B70770B00E4F959 /* Build configuration list for PBXNativeTarget "TwitterCloneTests" */ = {
 			isa = XCConfigurationList;
@@ -455,6 +464,7 @@
 				9EC1597C1B70770B00E4F959 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

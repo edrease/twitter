@@ -17,14 +17,24 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.dataSource = self
-    tableView.reloadData()
-    if let filePath = NSBundle.mainBundle().pathForResource("tweet", ofType: "json") {
-      if let data = NSData(contentsOfFile: filePath) {
-        if let tweets = TweetJSONParser.tweetsFromJSONData(data) {
-          self.tweets = tweets
-        }
+    self.title = "Shitter"
+    LoginService.loginToTwitter { (errorDescription, account) -> (Void) in
+      if let errorDescription = errorDescription {
+        println("Shit")
+      }
+      
+      if let account = account {
+        TwitterService.getTweetsFromHomeTimeline(account, completionHandler: { (errorDescription, tweets) -> (Void) in
+          if let tweets = tweets {
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+              self.tweets = tweets
+              self.tableView.reloadData()
+            })
+          }
+        })
       }
     }
+    tableView.reloadData()
   }
 
   override func didReceiveMemoryWarning() {
