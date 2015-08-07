@@ -43,3 +43,24 @@ func fizzBuzz() {
 }
 
 fizzBuzz()
+
+
+//Return number of "hi's" in given String
+
+func returnNumberOfTimeHiAppears (string: String) -> Int {
+  var numberOfHi = 0
+  for character in string {
+    if character == "h" {
+      
+      ++numberOfHi
+    }
+  }
+  return numberOfHi
+}
+
+returnNumberOfTimeHiAppears("how are you heidi the ho?")
+
+
+
+
+

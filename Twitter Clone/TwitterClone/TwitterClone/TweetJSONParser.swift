@@ -23,11 +23,45 @@ class TweetJSONParser {
                id = object["id_str"] as? String,
                userInfo = object["user"] as? [String: AnyObject],
                username = userInfo["name"] as? String,
-               profileImageURL = userInfo["profile_image_url"] as? String
-              {
-          let tweet = Tweet(text: text, username: username, userID: id, profileImageURL: profileImageURL)
-          tweets.append(tweet)
-        }
+               profileImageURL = userInfo["profile_image_url"] as? String {
+               
+               var tweet = Tweet(text: text, username: username, userID: id, profileImageURL: profileImageURL, wasRetweeted: false, isQuote: false,originalAuthor: nil, retweetText: nil)
+      
+               if let retweet = object["retweeted_status"] as? [String: AnyObject] {
+                  
+                  if let userInfo = retweet["user"] as? [String: AnyObject], text = retweet["text"] as? String {
+                  
+                  if let username = userInfo["name"] as? String,
+                  profileImageURL = userInfo["profile_image_url"] as? String,
+                  id = userInfo["id_str"] as? String {
+                  
+                    tweet.retweetText = text
+                    tweet.originalAuthor = username
+                    tweet.userID = id
+                    tweet.profileImageURL = profileImageURL
+                    tweet.wasRetweeted = true
+                  }
+                 }
+                } else if let isQuote = object["quoted_status"] as? [String: AnyObject] {
+                if let userInfo = isQuote["user"] as? [String: AnyObject], text = isQuote["text"] as? String {
+                  
+                  if let username = userInfo["name"] as? String,
+                    profileImageURL = userInfo["profile_image_url"] as? String,
+                    id = userInfo["id_str"] as? String {
+                      
+                      tweet.retweetText = text
+                      tweet.originalAuthor = username
+                      tweet.userID = id
+                      tweet.profileImageURL = profileImageURL
+                      tweet.isQuote = true
+                      print(isQuote)
+                  }
+                }
+	               }
+                
+              tweets.append(tweet)
+            
+            }
       }
       return tweets
     }

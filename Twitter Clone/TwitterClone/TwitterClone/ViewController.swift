@@ -18,6 +18,9 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     tableView.dataSource = self
     self.title = "Shitter"
+    tableView.estimatedRowHeight = 100
+    tableView.rowHeight = UITableViewAutomaticDimension
+    
     LoginService.loginToTwitter { (errorDescription, account) -> (Void) in
       if let errorDescription = errorDescription {
         println("Shit")
@@ -41,7 +44,18 @@ class ViewController: UIViewController {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
   }
-
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "toTweetDetailViewController" {
+      if let tweetDetailViewController = segue.destinationViewController as? TweetDetailViewController {
+        if let indexPath = tableView.indexPathForSelectedRow() {
+          let selectedRow = indexPath.row
+          let selectedTweet = tweets[selectedRow]
+          tweetDetailViewController.selectedTweet = selectedTweet
+        }
+      }
+    }
+  }
 
 }
 
@@ -51,9 +65,11 @@ extension ViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! TweetCell
     let tweet = tweets[indexPath.row]
-    cell.textLabel?.text = tweet.text
+    cell.userNameLabel.text = tweet.username
+    cell.userNameLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+    cell.tweetBodyText.text = tweet.text
     return cell
   }
 }

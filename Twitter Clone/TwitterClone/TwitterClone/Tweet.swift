@@ -14,6 +14,10 @@ struct Tweet {
   var username: String
   var userID: String
   var profileImageURL: String
+  var wasRetweeted: Bool
+  var isQuote: Bool
+  var originalAuthor: String?
+  var retweetText: String?
   
 }
 
