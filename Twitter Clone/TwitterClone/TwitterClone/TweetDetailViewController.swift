@@ -17,14 +17,24 @@ class TweetDetailViewController: UIViewController {
     override func viewDidLoad() {
       super.viewDidLoad()
       tableView.dataSource = self
+      tableView.delegate = self 
       tableView.estimatedRowHeight = 150
       tableView.rowHeight = UITableViewAutomaticDimension
+      tableView.registerNib(UINib(nibName: "TweetCellNib", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TweetCell")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "ToUserTweetTimeline" {
+      if let individualTimelineViewController = segue.destinationViewController as? IndividualTimelineViewController {
+          let userScreenName = selectedTweet.screenName
+          individualTimelineViewController.screenName = userScreenName
+      }
+    }
+  }
 }
 
 extension TweetDetailViewController: UITableViewDataSource {
@@ -34,20 +44,26 @@ extension TweetDetailViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! TweetDetailCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
     let tweet = selectedTweet
     if tweet.wasRetweeted == true || tweet.isQuote == true {
-      cell.username.text = tweet.originalAuthor
-      cell.detailedTweetText.text = tweet.retweetText
+      cell.userNameLabel.text = tweet.originalAuthor
+      cell.tweetBodyText.text = tweet.retweetText
     } else {
-      cell.username.text = tweet.username
-      cell.detailedTweetText.text = tweet.text
+      cell.userNameLabel.text = tweet.username
+      cell.tweetBodyText.text = tweet.text
     }
     
-    cell.username.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-
+    cell.userNameLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+    cell.userNameLabel.font.fontWithSize(100)
+    println(tweet.screenName)
     return cell
     
   }
-  
+}
+
+extension TweetDetailViewController: UITableViewDelegate {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    performSegueWithIdentifier("ToUserTweetTimeline", sender: nil)
+  }
 }

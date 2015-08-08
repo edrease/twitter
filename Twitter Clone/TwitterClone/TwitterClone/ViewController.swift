@@ -16,10 +16,13 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.delegate = self
     tableView.dataSource = self
     self.title = "Shitter"
     tableView.estimatedRowHeight = 100
     tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.registerNib(UINib(nibName: "TweetCellNib", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TweetCell")
+    
     
     LoginService.loginToTwitter { (errorDescription, account) -> (Void) in
       if let errorDescription = errorDescription {
@@ -46,7 +49,7 @@ class ViewController: UIViewController {
   }
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if segue.identifier == "toTweetDetailViewController" {
+    if segue.identifier == "ToTweetDetailViewController" {
       if let tweetDetailViewController = segue.destinationViewController as? TweetDetailViewController {
         if let indexPath = tableView.indexPathForSelectedRow() {
           let selectedRow = indexPath.row
@@ -65,12 +68,19 @@ extension ViewController: UITableViewDataSource {
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! TweetCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
     let tweet = tweets[indexPath.row]
     cell.userNameLabel.text = tweet.username
     cell.userNameLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
     cell.tweetBodyText.text = tweet.text
     return cell
+  }
+}
+
+extension ViewController: UITableViewDelegate {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    performSegueWithIdentifier("ToTweetDetailViewController", sender: nil)
+    
   }
 }
 

@@ -18,6 +18,7 @@ struct Tweet {
   var isQuote: Bool
   var originalAuthor: String?
   var retweetText: String?
+  var screenName: String
   
 }
 

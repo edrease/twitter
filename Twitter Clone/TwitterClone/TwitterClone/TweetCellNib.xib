@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetCell" rowHeight="100" id="oUq-u3-Eg2" customClass="TweetCell" customModule="TwitterClone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oUq-u3-Eg2" id="8PX-KE-jLX">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ca-Oe-I5J">
+                        <rect key="frame" x="56" y="8" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOW-h0-noY">
+                        <rect key="frame" x="8" y="8" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="FuX-xJ-Bq2"/>
+                            <constraint firstAttribute="width" constant="40" id="xRH-Ur-LJH"/>
+                        </constraints>
+                        <state key="normal" title="Button">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbJ-f1-EzS">
+                        <rect key="frame" x="56" y="45" width="536" height="46"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="2Ca-Oe-I5J" firstAttribute="leading" secondItem="WOW-h0-noY" secondAttribute="trailing" constant="8" id="1Wd-zz-Jfs"/>
+                    <constraint firstItem="2Ca-Oe-I5J" firstAttribute="top" secondItem="8PX-KE-jLX" secondAttribute="topMargin" id="Ad0-LG-dwG"/>
+                    <constraint firstItem="IbJ-f1-EzS" firstAttribute="trailing" secondItem="8PX-KE-jLX" secondAttribute="trailingMargin" id="MRb-LA-OjI"/>
+                    <constraint firstItem="WOW-h0-noY" firstAttribute="leading" secondItem="8PX-KE-jLX" secondAttribute="leadingMargin" id="PPk-KK-jW9"/>
+                    <constraint firstItem="IbJ-f1-EzS" firstAttribute="top" secondItem="2Ca-Oe-I5J" secondAttribute="bottom" constant="16" id="jpt-CM-pCq"/>
+                    <constraint firstItem="WOW-h0-noY" firstAttribute="top" secondItem="8PX-KE-jLX" secondAttribute="topMargin" id="jrh-ce-4vJ"/>
+                    <constraint firstItem="IbJ-f1-EzS" firstAttribute="leading" secondItem="2Ca-Oe-I5J" secondAttribute="leading" id="rS0-LU-x4J"/>
+                    <constraint firstItem="IbJ-f1-EzS" firstAttribute="bottom" secondItem="8PX-KE-jLX" secondAttribute="bottomMargin" id="wcF-dZ-sV0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="tweetBodyText" destination="IbJ-f1-EzS" id="vCh-qr-X0X"/>
+                <outlet property="userNameLabel" destination="2Ca-Oe-I5J" id="j92-sH-OuR"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -23,9 +23,10 @@ class TweetJSONParser {
                id = object["id_str"] as? String,
                userInfo = object["user"] as? [String: AnyObject],
                username = userInfo["name"] as? String,
-               profileImageURL = userInfo["profile_image_url"] as? String {
+               profileImageURL = userInfo["profile_image_url"] as? String,
+               screenName = userInfo["screen_name"] as? String {
                
-               var tweet = Tweet(text: text, username: username, userID: id, profileImageURL: profileImageURL, wasRetweeted: false, isQuote: false,originalAuthor: nil, retweetText: nil)
+                var tweet = Tweet(text: text, username: username, userID: id, profileImageURL: profileImageURL, wasRetweeted: false, isQuote: false,originalAuthor: nil, retweetText: nil, screenName: screenName)
       
                if let retweet = object["retweeted_status"] as? [String: AnyObject] {
                   
@@ -54,7 +55,7 @@ class TweetJSONParser {
                       tweet.userID = id
                       tweet.profileImageURL = profileImageURL
                       tweet.isQuote = true
-                      print(isQuote)
+                      
                   }
                 }
 	               }
