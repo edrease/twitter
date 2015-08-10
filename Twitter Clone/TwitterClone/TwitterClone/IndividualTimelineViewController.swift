@@ -14,6 +14,7 @@ class IndividualTimelineViewController: UIViewController {
   var userProfileImage: UIImage!
   var userName: String!
   var userTweets = [Tweet]()
+  lazy var imageQueue = NSOperationQueue()
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var headerView: UIView!
@@ -67,10 +68,34 @@ extension IndividualTimelineViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
-    let tweet = userTweets[indexPath.row]
+    cell.tag++
+    let tag = cell.tag
+    var tweet = userTweets[indexPath.row]
     cell.userNameLabel.text = tweet.username
     cell.userNameLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
     cell.tweetBodyText.text = tweet.text
+    
+    if let profileImage = tweet.profileImage {
+      cell.profileImage.image = profileImage
+    } else {
+      imageQueue.addOperationWithBlock({ () -> Void in
+        
+        if let image = DownloadImage.fetchImage(tweet.profileImageURL) {
+          let size = ImageResizer.switchImageSize(image)
+          let resizedImage = ImageResizer.resizeImage(image, size: size)
+          
+          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            tweet.profileImage = resizedImage
+            self.userTweets[indexPath.row] = tweet
+            if cell.tag == tag {
+              cell.profileImage.image = resizedImage
+              
+            }
+          })
+        }
+      })
+    }
+    
     return cell
   }
   

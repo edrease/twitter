@@ -61,6 +61,18 @@ func returnNumberOfTimeHiAppears (string: String) -> Int {
 returnNumberOfTimeHiAppears("how are you heidi the ho?")
 
 
+//Remove x's
+
+func removeXFromString (string: String) -> String {
+  
+  for x in string {
+    if x == "x" {
+      
+    }
+  }
+  return string
+}
+
 
 
 

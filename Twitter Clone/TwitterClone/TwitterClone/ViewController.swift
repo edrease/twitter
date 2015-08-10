@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     tableView.delegate = self
     tableView.dataSource = self
-    self.title = "Shitter"
+    title = "Shitter"
     tableView.estimatedRowHeight = 100
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.registerNib(UINib(nibName: "TweetCellNib", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TweetCell")
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     }
     tableView.reloadData()
   }
-
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -80,32 +80,22 @@ extension ViewController: UITableViewDataSource {
       cell.profileImage.image = profileImage
     } else {
       imageQueue.addOperationWithBlock({ () -> Void in
-        if let imageURL = NSURL(string: tweet.profileImageURL),
-               imageData = NSData(contentsOfURL: imageURL),
-               image = UIImage(data: imageData) {
-               var size: CGSize
-                switch UIScreen.mainScreen().scale {
-                case 2:
-                  size = CGSize(width: 80, height: 80)
-                case 3:
-                  size = CGSize(width: 120, height: 120)
-                default:
-                  size = CGSize(width: 40, height: 40)
-              }
-              
-                let resizedImage = ImageResizer.resizeImage(image, size: size)
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                  tweet.profileImage = resizedImage
-                  self.tweets[indexPath.row] = tweet
-                  if cell.tag == tag {
-                  cell.profileImage.image = resizedImage
-                  }
-                })
+        
+        if let image = DownloadImage.fetchImage(tweet.profileImageURL) {
+         let size = ImageResizer.switchImageSize(image)
+         let resizedImage = ImageResizer.resizeImage(image, size: size)
+        
+          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            tweet.profileImage = resizedImage
+            self.tweets[indexPath.row] = tweet
+            if cell.tag == tag {
+              cell.profileImage.image = resizedImage
+          
+            }
+          })
         }
       })
     }
-    
     return cell
   }
 }

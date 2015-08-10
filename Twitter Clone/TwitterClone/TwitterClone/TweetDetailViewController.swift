@@ -30,12 +30,15 @@ class TweetDetailViewController: UIViewController {
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "ToUserTweetTimeline" {
       if let individualTimelineViewController = segue.destinationViewController as? IndividualTimelineViewController {
-          let userScreenName = selectedTweet.screenName
-          individualTimelineViewController.screenName = userScreenName
-          let profileImage = selectedTweet.profileImage
-          individualTimelineViewController.userProfileImage = profileImage
-          let userName = selectedTweet.username
-          individualTimelineViewController.userName = userName 
+        
+        if selectedTweet.wasRetweeted == true || selectedTweet.isQuote == true {
+          individualTimelineViewController.screenName = selectedTweet.originalAuthorScreenName
+          individualTimelineViewController.userName = selectedTweet.originalAuthor
+        } else {
+          individualTimelineViewController.screenName = selectedTweet.screenName
+          individualTimelineViewController.userName = selectedTweet.username
+        }
+          individualTimelineViewController.userProfileImage = selectedTweet.profileImage
       }
     }
   }

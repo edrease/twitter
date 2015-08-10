@@ -20,6 +20,7 @@ struct Tweet {
   var retweetText: String?
   var screenName: String
   var profileImage: UIImage?
+  var originalAuthorScreenName: String?
   
 }
 

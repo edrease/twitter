@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E06A01F1B79086200AC8D00 /* DownloadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E06A01E1B79086200AC8D00 /* DownloadImage.swift */; };
 		9E170A541B7711E5004DFFA2 /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E170A531B7711E5004DFFA2 /* ImageResizer.swift */; };
-		9E170A581B7817B4004DFFA2 /* GetImageForcell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E170A571B7817B4004DFFA2 /* GetImageForcell.swift */; };
 		9E170A5A1B78332F004DFFA2 /* UserTweetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E170A591B78332F004DFFA2 /* UserTweetDetailViewController.swift */; };
 		9EC1595E1B70770B00E4F959 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC1595D1B70770B00E4F959 /* AppDelegate.swift */; };
 		9EC159601B70770B00E4F959 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC1595F1B70770B00E4F959 /* ViewController.swift */; };
@@ -38,8 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E06A01E1B79086200AC8D00 /* DownloadImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImage.swift; sourceTree = "<group>"; };
 		9E170A531B7711E5004DFFA2 /* ImageResizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
-		9E170A571B7817B4004DFFA2 /* GetImageForcell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImageForcell.swift; sourceTree = "<group>"; };
 		9E170A591B78332F004DFFA2 /* UserTweetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTweetDetailViewController.swift; sourceTree = "<group>"; };
 		9EC159581B70770B00E4F959 /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC1595C1B70770B00E4F959 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 				9EC159881B719B7200E4F959 /* LoginService.swift */,
 				9EC1598A1B726F6100E4F959 /* TwitterService.swift */,
 				9E170A531B7711E5004DFFA2 /* ImageResizer.swift */,
-				9E170A571B7817B4004DFFA2 /* GetImageForcell.swift */,
+				9E06A01E1B79086200AC8D00 /* DownloadImage.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -275,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E170A5A1B78332F004DFFA2 /* UserTweetDetailViewController.swift in Sources */,
+				9E06A01F1B79086200AC8D00 /* DownloadImage.swift in Sources */,
 				9EC159831B70783200E4F959 /* TweetJSONParser.swift in Sources */,
 				9EC159971B75582C00E4F959 /* IndividualTimelineViewController.swift in Sources */,
 				9E170A541B7711E5004DFFA2 /* ImageResizer.swift in Sources */,
@@ -282,7 +283,6 @@
 				9EC159811B7077B200E4F959 /* Tweet.swift in Sources */,
 				9EC159891B719B7200E4F959 /* LoginService.swift in Sources */,
 				9EC159601B70770B00E4F959 /* ViewController.swift in Sources */,
-				9E170A581B7817B4004DFFA2 /* GetImageForcell.swift in Sources */,
 				9EC1598F1B72EB4F00E4F959 /* TweetDetailViewController.swift in Sources */,
 				9EC1595E1B70770B00E4F959 /* AppDelegate.swift in Sources */,
 				9EC1598B1B726F6100E4F959 /* TwitterService.swift in Sources */,
