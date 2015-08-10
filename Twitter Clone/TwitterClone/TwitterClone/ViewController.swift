@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
   
   var tweets = [Tweet]()
-  
+  lazy var imageQueue = NSOperationQueue()
   @IBOutlet weak var tableView: UITableView!
   
   override func viewDidLoad() {
@@ -23,14 +23,15 @@ class ViewController: UIViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     tableView.registerNib(UINib(nibName: "TweetCellNib", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TweetCell")
     
-    
     LoginService.loginToTwitter { (errorDescription, account) -> (Void) in
       if let errorDescription = errorDescription {
         println("Shit")
       }
       
       if let account = account {
-        TwitterService.getTweetsFromHomeTimeline(account, completionHandler: { (errorDescription, tweets) -> (Void) in
+        TwitterService.sharedService.account = account
+        TwitterService.getTweetsFromHomeTimeline({ (errorDescription, tweets) -> (Void) in
+          
           if let tweets = tweets {
             NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
               self.tweets = tweets
@@ -59,7 +60,6 @@ class ViewController: UIViewController {
       }
     }
   }
-
 }
 
 extension ViewController: UITableViewDataSource {
@@ -69,10 +69,43 @@ extension ViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
-    let tweet = tweets[indexPath.row]
+    cell.tag++
+    let tag = cell.tag
+    var tweet = tweets[indexPath.row]
     cell.userNameLabel.text = tweet.username
     cell.userNameLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
     cell.tweetBodyText.text = tweet.text
+    
+    if let profileImage = tweet.profileImage {
+      cell.profileImage.image = profileImage
+    } else {
+      imageQueue.addOperationWithBlock({ () -> Void in
+        if let imageURL = NSURL(string: tweet.profileImageURL),
+               imageData = NSData(contentsOfURL: imageURL),
+               image = UIImage(data: imageData) {
+               var size: CGSize
+                switch UIScreen.mainScreen().scale {
+                case 2:
+                  size = CGSize(width: 80, height: 80)
+                case 3:
+                  size = CGSize(width: 120, height: 120)
+                default:
+                  size = CGSize(width: 40, height: 40)
+              }
+              
+                let resizedImage = ImageResizer.resizeImage(image, size: size)
+                
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                  tweet.profileImage = resizedImage
+                  self.tweets[indexPath.row] = tweet
+                  if cell.tag == tag {
+                  cell.profileImage.image = resizedImage
+                  }
+                })
+        }
+      })
+    }
+    
     return cell
   }
 }

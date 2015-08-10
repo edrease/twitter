@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>2D09D83C-F787-4B2F-8566-512654B6B730</string>
 	<key>IDESourceControlProjectName</key>
-	<string>TwitterClone</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DCC37D24527266C29CD17791BB6DCB9AC36F63A5</key>
 		<string>https://github.com/edrease/twitter.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Twitter Clone/TwitterClone/TwitterClone.xcodeproj</string>
+	<string>Twitter Clone/TwitterClone/TwitterClone.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DCC37D24527266C29CD17791BB6DCB9AC36F63A5</key>

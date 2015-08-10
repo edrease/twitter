@@ -11,14 +11,24 @@ import UIKit
 class IndividualTimelineViewController: UIViewController {
   
   var screenName: String!
+  var userProfileImage: UIImage!
+  var userName: String!
   var userTweets = [Tweet]()
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var headerView: UIView!
+  @IBOutlet weak var userHeadlineProfileImage: UIImageView!
+  @IBOutlet weak var userNameLabel: UILabel!
+  @IBOutlet weak var userScreenNameLabel: UILabel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.dataSource = self
+    tableView.delegate = self
+    tableView.estimatedRowHeight = 100
+    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.registerNib(UINib(nibName: "TweetCellNib", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TweetCell")
+        
     TwitterService.getTweetsFromUserTimeline(screenName, completionHandler: { (errorDescription, tweets) -> (Void) in
       if let tweets = tweets {
         NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
@@ -27,11 +37,26 @@ class IndividualTimelineViewController: UIViewController {
         })
       }
     })
+    self.userHeadlineProfileImage.image = userProfileImage
+    self.userScreenNameLabel.text = "@\(screenName)"
+    self.userNameLabel.text = userName
   }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "ToUserTweetDetailController" {
+      if let userTweetDetailViewController = segue.destinationViewController as? UserTweetDetailViewController {
+        if let indexPath = tableView.indexPathForSelectedRow() {
+          let selectedRow = indexPath.row
+          let selectedTweet = userTweets[selectedRow]
+          userTweetDetailViewController.selectedTweet = selectedTweet
+        }
+      }
+    }
+  }
 }
 
 extension IndividualTimelineViewController: UITableViewDataSource {
@@ -49,4 +74,10 @@ extension IndividualTimelineViewController: UITableViewDataSource {
     return cell
   }
   
+}
+
+extension IndividualTimelineViewController: UITableViewDelegate {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    performSegueWithIdentifier("ToUserTweetDetailController", sender: nil) 
+  }
 }

@@ -15,11 +15,13 @@ class TwitterService {
   static let sharedService = TwitterService()
   private init() {}
   
-  class func getTweetsFromHomeTimeline (twitterAccount: ACAccount?, completionHandler: (String?, [Tweet]?) -> (Void)) {
+  var account: ACAccount?
+  
+  class func getTweetsFromHomeTimeline (completionHandler: (String?, [Tweet]?) -> (Void)) {
     
     let requestForTweets = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")!, parameters: nil)
     
-    requestForTweets.account = twitterAccount
+    requestForTweets.account = self.sharedService.account
     
     requestForTweets.performRequestWithHandler { (data, httpResponse, error) -> Void in
       if let error = error {
@@ -47,6 +49,7 @@ class TwitterService {
   class func getTweetsFromUserTimeline (screenName: String, completionHandler: (String?, [Tweet]?) -> (Void)) {
     
     let requestForTweets = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: SLRequestMethod.GET, URL: NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=\(screenName)")!, parameters: nil)
+    requestForTweets.account = self.sharedService.account
     
     println(requestForTweets.preparedURLRequest())
     requestForTweets.performRequestWithHandler { (data, httpResponse, error) -> Void in

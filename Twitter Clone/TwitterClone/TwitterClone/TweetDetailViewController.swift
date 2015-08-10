@@ -32,6 +32,10 @@ class TweetDetailViewController: UIViewController {
       if let individualTimelineViewController = segue.destinationViewController as? IndividualTimelineViewController {
           let userScreenName = selectedTweet.screenName
           individualTimelineViewController.screenName = userScreenName
+          let profileImage = selectedTweet.profileImage
+          individualTimelineViewController.userProfileImage = profileImage
+          let userName = selectedTweet.username
+          individualTimelineViewController.userName = userName 
       }
     }
   }
@@ -45,7 +49,7 @@ extension TweetDetailViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetCell
-    let tweet = selectedTweet
+    var tweet = selectedTweet
     if tweet.wasRetweeted == true || tweet.isQuote == true {
       cell.userNameLabel.text = tweet.originalAuthor
       cell.tweetBodyText.text = tweet.retweetText
@@ -53,9 +57,9 @@ extension TweetDetailViewController: UITableViewDataSource {
       cell.userNameLabel.text = tweet.username
       cell.tweetBodyText.text = tweet.text
     }
-    
     cell.userNameLabel.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
     cell.userNameLabel.font.fontWithSize(100)
+    cell.profileImage.image = selectedTweet.profileImage
     println(tweet.screenName)
     return cell
     

@@ -26,7 +26,7 @@ class TweetJSONParser {
                profileImageURL = userInfo["profile_image_url"] as? String,
                screenName = userInfo["screen_name"] as? String {
                
-                var tweet = Tweet(text: text, username: username, userID: id, profileImageURL: profileImageURL, wasRetweeted: false, isQuote: false,originalAuthor: nil, retweetText: nil, screenName: screenName)
+                var tweet = Tweet(text: text, username: username, userID: id, profileImageURL: profileImageURL, wasRetweeted: false, isQuote: false,originalAuthor: nil, retweetText: nil, screenName: screenName, profileImage: nil)
       
                if let retweet = object["retweeted_status"] as? [String: AnyObject] {
                   

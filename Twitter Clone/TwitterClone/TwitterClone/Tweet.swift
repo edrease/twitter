@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 MysterioGroupSoftware. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Tweet {
   
@@ -19,6 +19,7 @@ struct Tweet {
   var originalAuthor: String?
   var retweetText: String?
   var screenName: String
+  var profileImage: UIImage?
   
 }
 
