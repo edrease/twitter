@@ -15,7 +15,7 @@ println(turtles)
 
 func reverseHarder (array: [AnyObject]) -> [AnyObject] {
   
-  for item in array {
+  for index in array {
     
   }
   
@@ -73,6 +73,22 @@ func removeXFromString (string: String) -> String {
   return string
 }
 
+//Queue implementation
 
+class Queue {
+  
+  var itemsArray = [Int]()
+  
+  func enqueue(itemToAdd: Int) -> [Int] {
+    itemsArray.insert(itemToAdd, atIndex: 0)
+    return itemsArray
+  }
+  
+  func dequeue() {
+    itemsArray.removeLast()
+    return
+  }
+  
+}
 
 
